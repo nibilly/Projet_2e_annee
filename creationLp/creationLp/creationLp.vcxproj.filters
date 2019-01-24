@@ -33,4 +33,24 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\CSV\Capabilite.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="..\..\CSV\CapaMaxHeure.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="..\..\CSV\CoefC.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="..\..\CSV\DemandeQ.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="..\..\CSV\StockageMax.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="..\..\CSV\Succ.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+  </ItemGroup>
 </Project>

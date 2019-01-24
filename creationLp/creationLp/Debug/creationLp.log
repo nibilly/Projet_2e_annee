@@ -1,8 +1,16 @@
 ﻿  creationLp.cpp
-c:\users\nibilly.local\downloads\projet_2e_annee\projet\creationlp\creationlp\creationlp.cpp(56): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\nibilly.local\downloads\projet_2e_annee\projet\creationlp\creationlp\creationlp.cpp(122): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-c:\users\nibilly.local\downloads\projet_2e_annee\projet\creationlp\creationlp\creationlp.cpp(156): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-c:\users\nibilly.local\downloads\projet_2e_annee\projet\creationlp\creationlp\creationlp.cpp(166): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-c:\users\nibilly.local\downloads\projet_2e_annee\projet\creationlp\creationlp\creationlp.cpp(177): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
-  creationLp.vcxproj -> C:\Users\nibilly.LOCAL\Downloads\Projet_2e_annee\Projet\creationLp\Debug\creationLp.exe
-  creationLp.vcxproj -> C:\Users\nibilly.LOCAL\Downloads\Projet_2e_annee\Projet\creationLp\Debug\creationLp.pdb (Partial PDB)
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(95): warning C4129: 'F' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(95): warning C4129: 'S' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(106): warning C4129: 'F' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(106): warning C4129: 'S' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(119): warning C4129: 'F' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(119): warning C4129: 'C' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(132): warning C4129: 'F' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(132): warning C4129: 'C' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(144): warning C4129: 'F' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(144): warning C4129: 'C' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(158): warning C4129: 'F' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(158): warning C4129: 'D' : caractère de séquence d'échappement non reconnu
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(80): warning C4101: 'QuaiLvr' : variable locale non référencée
+  creationLp.vcxproj -> P:\Bureau\Projet_2e_annee\creationLp\Debug\creationLp.exe
+  creationLp.vcxproj -> P:\Bureau\Projet_2e_annee\creationLp\Debug\creationLp.pdb (Partial PDB)

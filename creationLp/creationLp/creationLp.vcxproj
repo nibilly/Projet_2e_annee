@@ -157,6 +157,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\CSV\Capabilite.csv" />
+    <None Include="..\..\CSV\CapaMaxHeure.csv" />
+    <None Include="..\..\CSV\CoefC.csv" />
+    <None Include="..\..\CSV\DemandeQ.csv" />
+    <None Include="..\..\CSV\StockageMax.csv" />
+    <None Include="..\..\CSV\Succ.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
