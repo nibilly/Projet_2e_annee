@@ -1,0 +1,7 @@
+﻿  creationLp.cpp
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(26): warning C4267: 'initialisation' : conversion de 'size_t' en 'unsigned int', perte possible de données
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(35): warning C4267: '=' : conversion de 'size_t' en 'unsigned int', perte possible de données
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(39): warning C4267: 'argument' : conversion de 'size_t' en 'unsigned int', perte possible de données
+p:\bureau\projet_2e_annee\creationlp\creationlp\creationlp.cpp(41): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+  creationLp.vcxproj -> P:\Bureau\Projet_2e_annee\creationLp\x64\Debug\creationLp.exe
+  creationLp.vcxproj -> P:\Bureau\Projet_2e_annee\creationLp\x64\Debug\creationLp.pdb (Partial PDB)
