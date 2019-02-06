@@ -530,8 +530,8 @@ int main()
 		for (int j = 1; j <= NbFamille; j++) {
 			for (int j2 = 1; j2 <= NbFamille; j2++) {
 				if (j != j2) {
-						for (int p = 1; p <= NbFamille; p++) {
-							for (int t = 1; t < NbPeriode; t++) {
+					for (int p = 1; p <= NbFamille; p++) {
+						for (int t = 1; t < NbPeriode; t++) {
 							fichier << "C19(" << j << "," << j2 << "," << p << "," << t << "): ";
 							for (int s = t + 1; s <= NbPeriode; s++) {
 								fichier << "+X(" << j2 << "," << p << "," << s << ") ";
@@ -539,6 +539,42 @@ int main()
 							fichier << "+ " << H << " X(" << j << "," << p << "," << t << ") ";
 							fichier << "- " << H << " Y(" << j << "," << j2 << "," << p << "," << t << ") ";
 							fichier << "<= " << H << endl;
+						}
+					}
+				}
+			}
+		}
+
+		// contrainte 20 : c112
+		for (int j = 1; j <= NbFamille; j++) {
+			for (int j2 = 1; j2 <= NbFamille; j2++) {
+				if (j != j2) {
+					for (int p = 1; p <= NbFamille; p++) {
+						for (int t = 1; t < NbPeriode; t++) {
+							fichier << "C20(" << j << "," << j2 << "," << p << "," << t << "): ";
+							
+							fichier << "- X(" << j << "," << p << "," << t << ") ";
+							fichier << "+ Y(" << j << "," << j2 << "," << p << "," << t << ") ";
+							fichier << "<= 0" << endl;
+						}
+					}
+				}
+			}
+		}
+
+		// contrainte 21 : c113
+		for (int j = 1; j <= NbFamille; j++) {
+			for (int j2 = 1; j2 <= NbFamille; j2++) {
+				if (j != j2) {
+					for (int p = 1; p <= NbFamille; p++) {
+						for (int t = 1; t < NbPeriode; t++) {
+							fichier << "C21(" << j << "," << j2 << "," << p << "," << t << "): ";
+
+							for (int s = t + 1; s <= NbPeriode; s++) {
+								fichier << "-X(" << j2 << "," << p << "," << s << ") ";
+							}
+							fichier << "+ Y(" << j << "," << j2 << "," << p << "," << t << ") ";
+							fichier << "<= 0" << endl;
 						}
 					}
 				}
