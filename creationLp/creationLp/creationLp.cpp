@@ -88,7 +88,19 @@ int main()
 	int DebCharg = 1;
 	double TSDcible = 0.1;
 	int H = 9999999;
+	int CoutChangLigneProd = 1000000;
+	int CoutChangHangar = 1000000;
+	int CoutOuvLigne[NbFamille + 1];
+	int CoutOuvHangare[NbSommet + 1];//TO complite
+	int CoutStock[NbFamille + 1][NbSommet + 1];//TO complete
 	int somme;
+
+	CoutOuvLigne[1] = 10000;
+	CoutOuvLigne[2] = 10000;
+	CoutOuvLigne[3] = 20000;
+	CoutOuvLigne[4] = 15000;
+	CoutOuvLigne[5] = 15000;
+	CoutOuvLigne[6] = 15000;
 
 	//cedric
 
@@ -465,7 +477,6 @@ int main()
 		fichier << " = 0" << endl;
 		*/
 		// contrainte 15 c8
-
 		for (int j = 1; j <= NbFamille; j++) {
 			for (int t = 1; t <= NbPeriode; t++) {
 				if (Succ[0][j] == 1) {
@@ -482,7 +493,7 @@ int main()
 		}
 
 		// contrainte 16 : c101
-
+		
 		for (int j = 1; j <= NbFamille; j++) {
 			if (Succ[0][j] == 1) {
 				for (int p = 1; p <= NbFamille; p++) {
@@ -581,184 +592,421 @@ int main()
 			}
 		}
 
-
-		for (int j = 0; j <= NbFamille + 1; j++) {
-			for (int p = 1; p <= NbFamille; p++) {
-				for (int t = 1; t <= NbPeriode - 2; t++) {
-					if (StockageMax[j] > 0 && j >= 1 && j <= NbSommet) {
-						//      fichier << "C16("<<j<<","<<p<<","<<t<<"): " ;
-
-						for (int k = 0; k <= NbSommet + 1; k++) {
-							if (Succ[j][k] == 1) {
-
-								//             fichier<< " + Flot("<<j<<","<<k<<","<<p<<","<<t+2<<")";
+		//contrainte 22 : c121
+		for (int j = 1; j <= NbSommet+1; j++)
+		{
+			for (int f = 1; f <= NbFamille; f++)
+			{
+				for (int t = 1; t <= NbPeriode; t++)
+				{
+					if (StockageMax[j] > 0 && j >= 1 && j <= NbSommet)
+					{
+						fichier << "C22(" << j << "," << f << "," << t << "): ";
+						for (int i = 1; i <= NbSommet+1; i++)
+						{
+							if (Succ[i][j] == 1)
+							{
+								fichier << "- Flot(" << i << "," << j << "," << f << "," << t << ") ";
 							}
 						}
-
-						for (int i = 0; i <= NbSommet + 1; i++) {
-							for (int s = 1; s <= NbPeriode - 2; s++) {
-								if (s <= t && Succ[i][j] == 1) {
-
-									//          fichier<< " - Flot("<<i<<","<<j<<","<<p<<","<<s<<")";
-								}
-							}
-						}
-
-						for (int k = 0; k <= NbSommet + 1; k++) {
-							for (int s = 1; s <= NbPeriode - 2; s++) {
-								if (s <= t + 1 && Succ[j][k] == 1) {
-									//            fichier<< " + Flot("<<j<<","<<k<<","<<p<<","<<s<<")";
-								}
-							}
-						}
-						// fichier<<"<= 0" << endl;
-
+						fichier << "+ " << H << " * Z(" << j << "," << f << "," << t << ") ";
+						fichier << ">= 0" << endl;
 					}
 				}
 			}
 		}
-		// contrainte 15 :
 
-		for (int j = 0; j <= NbSommet + 1; j++) {
-			for (int p = 1; p <= NbFamille; p++) {
-				if (StockageMax[j] > 0 && j >= 1 && j <= NbSommet) {
-					fichier << "C15(" << j << "," << p << "): ";
-
-					for (int k = 0; k <= NbSommet + 1; k++) {
-						if (Succ[j][k] == 1) {
-							fichier << " + Flot(" << j << "," << k << "," << p << "," << 1 << ")";
-							fichier << " + Flot(" << j << "," << k << "," << p << "," << 2 << ")";
+		//contrainte 23 : c122
+		for (int j = 1; j <= NbSommet + 1; j++)
+		{
+			for (int f = 1; f <= NbFamille; f++)
+			{
+				for (int t = 1; t <= NbPeriode; t++)
+				{
+					if (StockageMax[j] > 0 && j >= 1 && j <= NbSommet)
+					{
+						fichier << "C23(" << j << "," << f << "," << t << "): ";
+						for (int i = 1; i <= NbSommet + 1; i++)
+						{
+							if (Succ[i][j] == 1)
+							{
+								fichier << "- Flot(" << i << "," << j << "," << f << "," << t << ") ";
+							}
 						}
+						fichier << "+ Z(" << j << "," << f << "," << t << ") ";
+						fichier << "<= 0" << endl;
 					}
-					fichier << " - Stock(" << j << "," << p << "," << 0 << ")";
-
-					fichier << "<= 0" << endl;
-
 				}
 			}
 		}
 
+		//contrainte 24 : c123
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int j2 = 1; j2 <= NbSommet; j2++)
+			{
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t < NbPeriode; t++)
+					{
+						if (j != j2 && StockageMax[j]>0 && StockageMax[j2]>0)
+						{
+							fichier << "C24(" << j << "," << j2 << "," << f << "," << t << "): ";
+							for (int s = t + 1; s <= NbPeriode; s++)
+							{
+								fichier << "+ Z(" << j2 << "," << f << "," << s << ") ";
+							}
+							fichier << "+ " << H << " Z(" << j << "," << f << "," << t << ") ";
+							fichier << "- " << H << " A(" << j << "," << j2 << "," << f << "," << t << ") ";
+							fichier << "<= " << H << endl;
+						}
+					}
+				}
+			}
+		}
 
-		// contrainte 16 :
+		//contrainte 25 : c124
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int j2 = 1; j2 <= NbSommet; j2++)
+			{
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t < NbPeriode; t++)
+					{
+						if (j != j2 && StockageMax[j]>0 && StockageMax[j2]>0)
+						{
+							fichier << "C25(" << j << "," << j2 << "," << f << "," << t << "): ";
+							fichier << "- Z(" << j << "," << f << "," << t << ") ";
+							fichier << "+ A(" << j << "," << j2 << "," << f << "," << t << ") ";
+							fichier << "<= 0" << endl;
+						}
+					}
+				}
+			}
+		}
 
+		//contrainte 26 : c125
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int j2 = 1; j2 <= NbSommet; j2++)
+			{
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t < NbPeriode; t++)
+					{
+						if (j != j2 && StockageMax[j]>0 && StockageMax[j2]>0)
+						{
+							fichier << "C26(" << j << "," << j2 << "," << f << "," << t << "): ";
+							for (int s = t + 1; s <= NbPeriode; s++)
+							{
+								fichier << "- Z(" << j2 << "," << f << "," << s << ") ";
+							}
+							fichier << "+ A(" << j << "," << j2 << "," << f << "," << t << ") ";
+							fichier << "<= 0" << endl;
+						}
+					}
+				}
+			}
+		}
+
+		//contrainte 27 : c131
+		for (int j = 1; j <= NbFamille; j++)
+		{
+			if (Succ[0][j] == 1)
+			{
+				fichier << "C27(" << j << "): ";
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t <= NbPeriode; t++)
+					{
+						fichier << "- X(" << j << "," << f << "," << t << ") ";
+					}
+				}
+				fichier << "+ U(" << j << ") ";
+				fichier << "<= 0" << endl;
+			}
+		}
+
+		//contrainte 28 : c132
+		for (int j = 1; j <= NbFamille; j++)
+		{
+			if (Succ[0][j] == 1)
+			{
+				fichier << "C28(" << j << "): ";
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t <= NbPeriode; t++)
+					{
+						fichier << "+ X(" << j << "," << f << "," << t << ") ";
+					}
+				}
+				fichier << "- " << H << " U(" << j << ") ";
+				fichier << "<= 0" << endl;
+			}
+		}
+		/*MANQUE TABLEAUX ET A VERIFIER
+		//contrainte 29 : c141
+		fichier << "C29: ";
+		for (int j = 1; j <= NbFamille; j++)
+		{
+			for (int j2 = 1; j2 <= NbFamille; j2++)
+			{
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t <= NbPeriode; t++)
+					{
+						if (j != j2)
+						{
+							fichier << "- " << CoutChangLigneProd << " Y(" << j << "," << j2 << "," << f << "," << t << ") ";
+						}
+					}
+				}
+			}
+		}
+		fichier << "+ CoutChaLigne = 0" << endl;
+
+		//contrainte 30 : c142
+		fichier << "C30: ";
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int j2 = 1; j2 <= NbSommet; j2++)
+			{
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t < NbPeriode; t++)
+					{
+						if (j != j2 && StockageMax[j] > 0 && StockageMax[j2] > 0)
+						{
+							fichier << "- " << CoutChangHangar << " A(" << j << "," << j2 << "," << f << "," << t << ") ";
+						}
+					}
+				}
+			}
+		}
+		fichier << "+ CoutChaHangar = 0" << endl;
+
+		//contrainte 31 : c143
+		fichier << "C31: ";
+		for (int j = 1; j <= NbFamille; j++)
+		{
+			fichier << "- " << CoutOuvLigne[j] << " U(" << j << ") ";
+		}
+		fichier << "+ CoutOuverLigne = 0" << endl;
+
+		//contrainte 32 : c144
+		fichier << "C32: ";
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			if (StockageMax[j] > 0)
+			{
+				fichier << "- " << CoutOuvHangare[j] << " F(" << j << ") ";
+			}
+		}
+		fichier << "+ CoutOuverHangar = 0" << endl;
+
+		//contrainte 33 : c145
+		fichier << "C33: ";
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int f = 1; f <= NbFamille; f++)
+			{
+				for (int t = 1; t < NbPeriode; t++)
+				{
+					fichier << "- " << CoutStock[f][j] << " Stock(" << j << "," << f << "," << t << ") ";
+				}
+			}
+		}
+		fichier << "+ CoutStokage = 0" << endl;
+		MANQUE TABLEAU*/
+
+		//A VERIFIER
+		fichier << endl << "Bounds" << endl;
+		for (int f = 1; f <= NbFamille; f++)
+		{
+			for (int f2 = 1; f2 <= NbFamille; f2++)
+			{
+				for (int t = 1; t <= NbPeriode; t++)
+				{
+					fichier << "0 <= TsdQuai(" << f << "," << f2 << "," << t << ") <= 1" << endl;
+				}
+			}
+		}
+		for (int f = 1; f <= NbFamille; f++)
+		{
+			for (int f2 = 1; f2 <= NbFamille; f2++)
+			{
+				for (int t = 1; t <= NbPeriode; t++)
+				{
+					fichier << "0 <= X(" << f << "," << f2 << "," << t << ") <= 1" << endl;
+				}
+			}
+		}
+		for (int f = 1; f <= NbFamille; f++)
+		{
+			for (int f2 = 1; f2 <= NbFamille; f2++)
+			{
+				if (f != f2)
+				{
+					for (int f3 = 0; f3 <= NbFamille; f3++)
+					{
+						for (int t = 1; t <= NbPeriode; t++)
+						{
+							fichier << "0 <= Y(" << f << "," << f2 << "," << f3 << "," << t << ") <= 1" << endl;
+						}
+					}
+				}
+			}
+		}
+		for (int j = 1; j <= NbSommet + 1; j++)
+		{
+			for (int f = 1; f <= NbFamille; f++)
+			{
+				for (int t = 1; t <= NbPeriode; t++)
+				{
+					if (StockageMax[j] > 0 && j >= 1 && j <= NbSommet)
+					{
+						fichier << "0 <= Z(" << j << "," << f << "," << t << ") <= 1" << endl;
+					}
+				}
+			}
+		}
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int j2 = 1; j2 <= NbSommet; j2++)
+			{
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t < NbPeriode; t++)
+					{
+						if (j != j2 && StockageMax[j] > 0 && StockageMax[j2] > 0)
+						{
+							fichier << "0 <= A(" << j << "," << j2 << "," << t << "," << t << ") <= 1" << endl;
+						}
+					}
+				}
+			}
+		}
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			if (StockageMax[j] > 0)
+			{
+				fichier << "0 <= F(" << j << ") <= 1" << endl;
+			}
+		}
+		for (int j = 1; j <= NbSommet; j++) 
+		{
+			for (int p = 1; p <= NbFamille; p++) 
+			{
+				for (int t = 1; t <= NbPeriode; t++) 
+				{
+					if (StockageMax[j] > 0) 
+					{
+						fichier << "0 <= G(" << j << "," << p << "," << t << ") <= 2" << endl;
+					}
+				}
+			}
+		}
+		for (int f = 1; f <= NbFamille; f++)
+		{
+			fichier << "0 <= U(" << f << ") <= 1" << endl;
+		}
+		fichier << "CoutChaLigne free" << endl << "CoutChaHangar free" << endl << "CoutOuverLigne free" << endl << "CoutOuverHangar free" << endl << "CoutStokage free" << endl;
+		
+		fichier << endl << "Generals" << endl;
+		for (int i = 0; i <= NbSommet + 1; i++) {
+			for (int j = 0; j <= NbSommet + 1; j++) {
+				if (Succ[i][j] == 1) {
+					for (int t = 1; t <= NbPeriode; t++) {
+						for (int p = 1; p <= NbFamille; p++) {
+							fichier << "Flot(" << i << "," << j << "," << p << "," << t << ")";
+						}
+					}
+				}
+			}
+		}
 		for (int j = 0; j <= NbSommet + 1; j++) {
 			if (StockageMax[j] > 0 && j >= 1 && j <= NbSommet) {
-				fichier << "C16(" << j << "): ";
-
-				for (int i = 0; i <= NbSommet + 1; i++) {
+				for (int p = 1; p <= NbFamille; p++) {
+					for (int t = 1; t <= NbPeriode; t++) {
+						fichier << "Stock(" << j << "," << p << "," << t << ")" << endl;
+					}
+				}
+			}
+		}
+		for (int f = 1; f <= NbFamille; f++) {
+			for (int p = 1; p <= NbFamille; p++) {
+				for (int t = 1; t <= NbPeriode; t++) {
+					fichier << "X(" << f << "," << p << "," << t << ")" << endl;
+				}
+			}
+		}
+		for (int j = 1; j <= NbFamille; j++) {
+			for (int j2 = 1; j2 <= NbFamille; j2++) {
+				if (j != j2) {
 					for (int p = 1; p <= NbFamille; p++) {
-						if (Succ[i][j] == 1) {
-
-							fichier << " + Flot(" << i << "," << j << "," << p << "," << NbPeriode - 1 << ")";
-							fichier << " + Flot(" << i << "," << j << "," << p << "," << NbPeriode << ")";
+						for (int t = 1; t <= NbPeriode; t++) {
+							fichier << " Y(" << j << "," << j2 << "," << p << "," << t << ") ";
 						}
 					}
 				}
-
-
-				fichier << "= 0" << endl;
-
 			}
 		}
-
-		// contrainte 17 :
-		fichier << "C17: ";
-
-
-		fichier << " + " << " TSDMoy ";
-		fichier << " >= " << TSDcible << endl;
-
-
-
-		// fichier <<" + " << " TSDMoy "  ;
-		// fichier <<" - " <<   TSDcible  ;
-		//fichier<<" >= 0" << endl;
-
-
-
-		// contrainte 18
-
-
-
-
-		/*       for (int j=0;j<=NbSommet+1;j++){
-		for( int p=1;p<=NbFamille;p++){
-		for (int t=1;t<=NbPeriode;t++){
-		if ( Succ[0][j]==1) {
-
-		fichier << "C18("<<j<<","<<p<<","<<t<<"): ";
-
-		fichier << " + X("<<j<<","<<p<<","<<t<<") " ;
-		fichier<<" - Flot("<<0<<","<<j<<","<<p<<","<<t<<")";
-
-
-		fichier << " <= " << 0 << endl;
-
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int f = 1; f <= NbFamille; f++)
+			{
+				for (int t = 1; t < NbPeriode; t++)
+				{
+					if (StockageMax[j] > 0)
+					{
+						fichier << "Z(" << j << "," << f << "," << t << ")" << endl;
+					}
+				}
+			}
 		}
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int j2 = 1; j2 <= NbSommet; j2++)
+			{
+				for (int f = 1; f <= NbFamille; f++)
+				{
+					for (int t = 1; t < NbPeriode; t++)
+					{
+						if (j != j2 && StockageMax[j]>0 && StockageMax[j2]>0)
+						{
+							fichier << "A(" << j << "," << j2 << "," << f << "," << t << ")" << endl;
+						}
+					}
+				}
+			}
 		}
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			if (StockageMax[j] > 0)
+			{
+				fichier << "F(" << j << ")" << endl;
+			}
 		}
+		for (int j = 1; j <= NbSommet; j++)
+		{
+			for (int p = 1; p <= NbFamille; p++)
+			{
+				for (int t = 1; t <= NbPeriode; t++)
+				{
+					if (StockageMax[j] > 0)
+					{
+						fichier << "G(" << j << "," << p << "," << t << ")" << endl;
+					}
+				}
+			}
 		}
-		// contrainte 19
-
-
-
-
-		for (int j=0;j<=NbSommet+1;j++){
-		for( int p=1;p<=NbFamille;p++){
-		for (int t=1;t<=NbPeriode;t++){
-		if ( Succ[0][j]==1) {
-
-		fichier << "C19("<<j<<","<<p<<","<<t<<"): ";
-
-		fichier << " + "<< H <<" X("<<j<<","<<p<<","<<t<<") " ;
-		fichier<<" - Flot("<<0<<","<<j<<","<<p<<","<<t<<")";
-
-
-		fichier << " >= " << 0 << endl;
-
+		for (int f = 1; f <= NbFamille; f++)
+		{
+			fichier << "U(" << f << ")" << endl;
 		}
-		}
-		}
-		}
-
-
-		// contrainte 20
-
-		for (int j=0;j<=NbSommet+1;j++){
-		for( int p=1;p<=NbFamille;p++){
-		for (int t=1;t<=NbPeriode;t++){
-		if ( Succ[0][j]==1) {
-
-		fichier << "C20("<<j<<","<<p<<","<<t<<"): ";
-
-		fichier << " + "<<ProdMin<<" X("<<j<<","<<p<<","<<t<<") " ;
-		fichier<<" - Flot("<<0<<","<<j<<","<<p<<","<<t<<")";
-
-
-		fichier << " <= " << 0 << endl;
-
-		}
-		}
-		}
-		}
-
-		// contrainte 21 :
-
-
-		fichier << "C21 " ;
-		for (int j=0;j<=NbSommet+1;j++){
-		if( StockageMax[j]>0 && j>=1 && j<=NbSommet){
-
-
-		fichier<< " + "<< "F("<<j<<") " ;
-
-		}
-		}
-		fichier <<" = " <<   NbHangerMax << endl ;
-		// fichier<<"= 0" << endl;*/
-
-
-
+		fichier << "CoutChaLigne" << endl << "CoutChaHangar" << endl << "CoutOuverLigne" << endl << "CoutOuverHangar" << endl << "CoutStokage" << endl << endl << "End" << endl;
+		//FIN A VERIFIER
 		fichier.close();
 	}//fi fichier
 	return 0;
