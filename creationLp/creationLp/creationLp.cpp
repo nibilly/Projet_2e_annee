@@ -381,28 +381,25 @@ int main()
 			}
 		}
 
-		/*pas vérifié : il manque le tableau QuaiLvr
-		// contrainte 10 : C51
 		
+		// contrainte 10 : C51
+		//en travaux
 		for (int p = 1; p <= NbFamille; p++) {
 			for (int q = 1; q <= NbQuai; q++) {
 				for (int t = 1; t <= NbPeriode; t++) {
 					fichier << "C10(" << p << "," << q << "," << t << "): ";
 					for (int i = 0; i <= NbSommet + 1; i++) {
-						if (Succ[i][QuaiLvr[q]] == 1) {
-							fichier << " + Flot(" << i << "," << QuaiLvr[q] << "," << p << "," << t << ")";
+						if (Succ[i][NumSommetQuai[q]] == 1) {
+							fichier << " + Flot(" << i << "," << NumSommetQuai[q] << "," << p << "," << t << ")";
 						}
 					}
-					for (int s = 1; s <= NbPeriode; s++) {
-						if (s >= t) {
-							fichier << " - K(" << p << "," << q << "," << t << "," << s << ")";
-						}
-					}
+					fichier << " - " << DemandeQ[p][q][t] << " TsdQuai(" << p << "," << q << "," << t << ")";
+						
 					fichier << " = 0" << endl;
 				}
 			}
 		}
-		*/
+		
 
 		// contrainte 11 C53
 
@@ -454,16 +451,18 @@ int main()
 		}
 
 
-		// contrainte 14 :c72
-		/* Je ne sais pas quoi sommer 
+		// contrainte 14 :c72 431
+		// Je ne sais pas quoi sommer en travaux
 		fichier << "C14: ";
+		somme = 0;
 		for (int p = 1; p <= NbFamille; p++) {
 			for (int q = 1; q <= NbQuai; q++) {
 				for (int t = 1; t <= NbPeriode; t++) {
-					somme += ////;
+					somme++;
 				}
 			}
 		}
+		somme = somme / (somme - 1) - 1;
 		for (int p = 1; p <= NbFamille; p++) {
 			for (int q = 1; q <= NbQuai; q++) {
 				for (int t = 1; t <= NbPeriode; t++) {
@@ -475,7 +474,8 @@ int main()
 		fichier <<" + " << " TSDMoy " ;
 
 		fichier << " = 0" << endl;
-		*/
+		//
+
 		// contrainte 15 c8
 		for (int j = 1; j <= NbFamille; j++) {
 			for (int t = 1; t <= NbPeriode; t++) {
@@ -745,7 +745,7 @@ int main()
 				fichier << "<= 0" << endl;
 			}
 		}
-		/*MANQUE TABLEAUX ET A VERIFIER
+		//MANQUE TABLEAUX ET A VERIFIER
 		//contrainte 29 : c141
 		fichier << "C29: ";
 		for (int j = 1; j <= NbFamille; j++)
@@ -818,7 +818,7 @@ int main()
 			}
 		}
 		fichier << "+ CoutStokage = 0" << endl;
-		MANQUE TABLEAU*/
+		//MANQUE TABLEAU*/
 
 		//A VERIFIER
 		fichier << endl << "Bounds" << endl;
