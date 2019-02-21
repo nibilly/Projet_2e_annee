@@ -83,6 +83,7 @@ int main()
 	double CapaMaxHeure[NbSommet+3][NbSommet+3];
 	double Capabilite[NbFamille+1][7];
 	double CoefC[7];
+	double NumSommetQuai[NbQuai + 1];
 
 	int DispersionPrdtHangar = 6;
 	int DebCharg = 1;
@@ -103,6 +104,16 @@ int main()
 	CoutOuvLigne[6] = 15000;
 
 	//cedric
+
+	/*QuaiLvr.csv = tableau 7X1 avec 1ère ligne inutile*/
+	/*Valeur utile dans NumSommetQuai de [1] à [6]*/
+
+	LectureFichier("QuaiLvr.csv");
+	for (int p = 1; p <= NbQuai; p++) {
+		NumSommetQuai[p] = Tab[p][0];
+
+	}
+
 
 	/* StockageMax.csv = tableau 1X48 */
 	/* Lecture des stockages max de chaque sommet. Boucle de (NbSommet + 2) car on rajoute la racine et le puit*/
