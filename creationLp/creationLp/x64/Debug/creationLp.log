@@ -3,8 +3,10 @@ c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\c
 c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(35): warning C4267: '=' : conversion de 'size_t' en 'unsigned int', perte possible de données
 c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(39): warning C4267: 'argument' : conversion de 'size_t' en 'unsigned int', perte possible de données
 c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(41): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
-c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(461): warning C4244: '+=' : conversion de 'double' en 'int', perte possible de données
-c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(96): warning C4101: 'CoutStock' : variable locale non référencée
-c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(95): warning C4101: 'CoutOuvHangare' : variable locale non référencée
+c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(109): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(120): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(127): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(134): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+c:\users\cesalette\documents\projet_git\projet_2e_annee-master\projet_2e_annee\creationlp\creationlp\creationlp.cpp(499): warning C4244: '+=' : conversion de 'double' en 'int', perte possible de données
   creationLp.vcxproj -> C:\Users\cesalette\Documents\Projet_git\Projet_2e_annee-master\Projet_2e_annee\creationLp\x64\Debug\creationLp.exe
   creationLp.vcxproj -> C:\Users\cesalette\Documents\Projet_git\Projet_2e_annee-master\Projet_2e_annee\creationLp\x64\Debug\creationLp.pdb (Partial PDB)
