@@ -52,5 +52,11 @@
     <None Include="..\..\CSV\Succ.csv">
       <Filter>Fichiers de ressources</Filter>
     </None>
+    <None Include="..\..\CSV\Demande.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="..\..\CSV\QuaiLvr.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
   </ItemGroup>
 </Project>

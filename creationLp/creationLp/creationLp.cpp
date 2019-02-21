@@ -83,6 +83,7 @@ int main()
 	double CapaMaxHeure[NbSommet+3][NbSommet+3];
 	double Capabilite[NbFamille+1][7];
 	double CoefC[7];
+	int NumSommetQuai[NbQuai + 1];
 
 	int DispersionPrdtHangar = 6;
 	int DebCharg = 1;
@@ -93,7 +94,7 @@ int main()
 	int CoutOuvLigne[NbFamille + 1];
 	int CoutOuvHangare[NbSommet + 1];//TO complite
 	int CoutStock[NbFamille + 1][NbSommet + 1];//TO complete
-	int somme;
+	double somme;
 
 	CoutOuvLigne[1] = 10000;
 	CoutOuvLigne[2] = 10000;
@@ -103,6 +104,16 @@ int main()
 	CoutOuvLigne[6] = 15000;
 
 	//cedric
+
+	/*QuaiLvr.csv = tableau 7X1 avec 1ère ligne inutile*/
+	/*Valeur utile dans NumSommetQuai de [1] à [6]*/
+
+	LectureFichier("QuaiLvr.csv");
+	for (int p = 1; p <= NbQuai; p++) {
+		NumSommetQuai[p] = Tab[p][0];
+
+	}
+
 
 	/* StockageMax.csv = tableau 1X48 */
 	/* Lecture des stockages max de chaque sommet. Boucle de (NbSommet + 2) car on rajoute la racine et le puit*/
@@ -383,19 +394,18 @@ int main()
 
 		
 		// contrainte 10 : C51
-		//en travaux
 		for (int p = 1; p <= NbFamille; p++) {
 			for (int q = 1; q <= NbQuai; q++) {
 				for (int t = 1; t <= NbPeriode; t++) {
 					fichier << "C10(" << p << "," << q << "," << t << "): ";
 					for (int i = 0; i <= NbSommet + 1; i++) {
 						if (Succ[i][NumSommetQuai[q]] == 1) {
-							fichier << " + Flot(" << i << "," << NumSommetQuai[q] << "," << p << "," << t << ")";
+							fichier << "+ Flot(" << i << "," << NumSommetQuai[q] << "," << p << "," << t << ") ";
 						}
 					}
-					fichier << " - " << DemandeQ[p][q][t] << " TsdQuai(" << p << "," << q << "," << t << ")";
+					fichier << "- " << DemandeQ[p][q][t] << " TsdQuai(" << p << "," << q << "," << t << ") ";
 						
-					fichier << " = 0" << endl;
+					fichier << "= 0" << endl;
 				}
 			}
 		}
@@ -451,8 +461,7 @@ int main()
 		}
 
 
-		// contrainte 14 :c72 431
-		// Je ne sais pas quoi sommer en travaux
+		// contrainte 14 :c72
 		fichier << "C14: ";
 		somme = 0;
 		for (int p = 1; p <= NbFamille; p++) {
@@ -462,7 +471,7 @@ int main()
 				}
 			}
 		}
-		somme = somme / (somme - 1) - 1;
+		somme = (somme+1) / somme - 1;
 		for (int p = 1; p <= NbFamille; p++) {
 			for (int q = 1; q <= NbQuai; q++) {
 				for (int t = 1; t <= NbPeriode; t++) {
@@ -474,7 +483,6 @@ int main()
 		fichier <<" + " << " TSDMoy " ;
 
 		fichier << " = 0" << endl;
-		//
 
 		// contrainte 15 c8
 		for (int j = 1; j <= NbFamille; j++) {
