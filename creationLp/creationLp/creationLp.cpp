@@ -83,7 +83,8 @@ int main()
 	double CapaMaxHeure[NbSommet+3][NbSommet+3];
 	double Capabilite[NbFamille+1][7];
 	double CoefC[7];
-	int NumSommetQuai[NbQuai + 1];
+	double NumSommetQuai[NbQuai + 1];
+	double prixVentes[NbFamille + 1];
 
 	int DispersionPrdtHangar = 6;
 	int DebCharg = 1;
@@ -92,18 +93,55 @@ int main()
 	int CoutChangLigneProd = 1000000;
 	int CoutChangHangar = 1000000;
 	int CoutOuvLigne[NbFamille + 1];
-	int CoutOuvHangare[NbSommet + 1];//TO complite
-	int CoutStock[NbFamille + 1][NbSommet + 1];//TO complete
-	double somme;
+	int CoutOuvHangare[NbSommet + 1];
+	int CoutStock[NbFamille + 1][NbSommet + 1];
+	int CoutProd[NbFamille + 1][NbQuai + 1];
+	int somme;
 
-	CoutOuvLigne[1] = 10000;
-	CoutOuvLigne[2] = 10000;
-	CoutOuvLigne[3] = 20000;
-	CoutOuvLigne[4] = 15000;
-	CoutOuvLigne[5] = 15000;
-	CoutOuvLigne[6] = 15000;
 
 	//cedric
+
+
+	/*CoutProd = tableau 6X6 ; */
+	LectureFichier("CoutProd.csv");
+	for (int p = 1; p <= NbFamille; p++) {
+		for (int q = 1; q <= NbQuai; q++) {
+			CoutProd[p][q] = Tab[p - 1][q - 1];
+		}
+	}
+
+
+
+
+	/*CoutStock = tableau 6X46 , CoutStock[p][q] = cout pour stocker x kilos de produit p dans le hangare q*/
+	LectureFichier("CoutStock.csv");
+	for (int p = 1; p <= NbFamille; p++) {
+		for (int q = 1; q <= NbSommet; q++) {
+			CoutStock[p][q] = Tab[p-1][q-1];
+		}
+	}
+	
+	/*CoutOuvHangare = tableau 47X1 avec 1ere ligne inutile*/
+	LectureFichier("CoutOuvHangare.csv");
+	for (int p = 1; p <= NbSommet; p++) {
+		CoutOuvHangare[p] = Tab[p][0];
+
+	}
+
+	/*CoutOuvLigne = tableau 6X1*/
+	LectureFichier("CoutOuvLigne.csv");
+	for (int p = 1; p <= NbFamille; p++) {
+		CoutOuvLigne[p] = Tab[p - 1][0];
+
+	}
+
+
+	/*PrixVentes.csv = tableau 6X1, correspondant surement au prix de chaque famille de produits*/
+	LectureFichier("PrixVentes.csv");
+	for (int p = 1; p <= NbFamille; p++) {
+		prixVentes[p] = Tab[p-1][0];
+
+	}
 
 	/*QuaiLvr.csv = tableau 7X1 avec 1ère ligne inutile*/
 	/*Valeur utile dans NumSommetQuai de [1] à [6]*/
