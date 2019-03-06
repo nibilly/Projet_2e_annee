@@ -84,7 +84,6 @@ int main()
 	double Capabilite[NbFamille+1][7];
 	double CoefC[7];
 	int NumSommetQuai[NbQuai + 1];
-	double prixVentes[NbFamille + 1];
 
 	int DispersionPrdtHangar = 6;
 	int DebCharg = 1;
@@ -132,14 +131,6 @@ int main()
 	LectureFichier("CoutOuvLigne.csv");
 	for (int p = 1; p <= NbFamille; p++) {
 		CoutOuvLigne[p] = Tab[p - 1][0];
-
-	}
-
-
-	/*PrixVentes.csv = tableau 6X1, correspondant surement au prix de chaque famille de produits*/
-	LectureFichier("PrixVentes.csv");
-	for (int p = 1; p <= NbFamille; p++) {
-		prixVentes[p] = Tab[p-1][0];
 
 	}
 
