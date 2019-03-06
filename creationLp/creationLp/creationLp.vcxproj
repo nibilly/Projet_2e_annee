@@ -163,7 +163,6 @@
     <None Include="..\..\CSV\CoefC.csv" />
     <None Include="..\..\CSV\CoutOuvHangare.csv" />
     <None Include="..\..\CSV\CoutOuvLigne.csv" />
-    <None Include="..\..\CSV\CoutProd.csv" />
     <None Include="..\..\CSV\CoutStock.csv" />
     <None Include="..\..\CSV\Demande.csv" />
     <None Include="..\..\CSV\DemandeQ.csv" />
@@ -171,6 +170,7 @@
     <None Include="..\..\CSV\QuaiLvr.csv" />
     <None Include="..\..\CSV\StockageMax.csv" />
     <None Include="..\..\CSV\Succ.csv" />
+    <None Include="CoutProd.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

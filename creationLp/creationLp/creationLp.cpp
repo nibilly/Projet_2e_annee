@@ -83,7 +83,7 @@ int main()
 	double CapaMaxHeure[NbSommet+3][NbSommet+3];
 	double Capabilite[NbFamille+1][7];
 	double CoefC[7];
-	double NumSommetQuai[NbQuai + 1];
+	int NumSommetQuai[NbQuai + 1];
 	double prixVentes[NbFamille + 1];
 
 	int DispersionPrdtHangar = 6;
@@ -96,7 +96,7 @@ int main()
 	int CoutOuvHangare[NbSommet + 1];
 	int CoutStock[NbFamille + 1][NbSommet + 1];
 	int CoutProd[NbFamille + 1][NbQuai + 1];
-	int somme;
+	double somme;
 
 
 	//cedric
@@ -499,7 +499,7 @@ int main()
 		}
 
 
-		// contrainte 14 :c72
+		// contrainte 14 :c72 MARCHE PAS
 		fichier << "C14: ";
 		somme = 0;
 		for (int p = 1; p <= NbFamille; p++) {
@@ -527,7 +527,7 @@ int main()
 			for (int t = 1; t <= NbPeriode; t++) {
 				if (Succ[0][j] == 1) {
 
-					fichier << "C15 ("<<j<<","<<t<<") : " ;
+					fichier << "C15("<<j<<","<<t<<") : " ;
 
 					for (int p = 1; p <= NbFamille; p++) {
 						fichier<< "+" << (1+CoefC[p])<<" Flot("<<0<<","<<j<<","<<p<<","<<t<<") " ;
@@ -655,7 +655,7 @@ int main()
 								fichier << "- Flot(" << i << "," << j << "," << f << "," << t << ") ";
 							}
 						}
-						fichier << "+ " << H << " * Z(" << j << "," << f << "," << t << ") ";
+						fichier << "+ " << H << " Z(" << j << "," << f << "," << t << ") ";
 						fichier << ">= 0" << endl;
 					}
 				}
@@ -857,9 +857,12 @@ int main()
 		{
 			for (int f = 1; f <= NbFamille; f++)
 			{
-				for (int t = 1; t < NbPeriode; t++)
+				if (CoutStock[f][j] > 0)
 				{
-					fichier << "- " << CoutStock[f][j] << " Stock(" << j << "," << f << "," << t << ") ";
+					for (int t = 1; t <= NbPeriode; t++)
+					{
+						fichier << "- " << CoutStock[f][j] << " Stock(" << j << "," << f << "," << t << ") ";
+					}
 				}
 			}
 		}
@@ -894,7 +897,7 @@ int main()
 			{
 				if (f != f2)
 				{
-					for (int f3 = 0; f3 <= NbFamille; f3++)
+					for (int f3 = 1; f3 <= NbFamille; f3++)
 					{
 						for (int t = 1; t <= NbPeriode; t++)
 						{
@@ -927,7 +930,7 @@ int main()
 					{
 						if (j != j2 && StockageMax[j] > 0 && StockageMax[j2] > 0)
 						{
-							fichier << "0 <= A(" << j << "," << j2 << "," << t << "," << t << ") <= 1" << endl;
+							fichier << "0 <= A(" << j << "," << j2 << "," << f << "," << t << ") <= 1" << endl;
 						}
 					}
 				}
@@ -965,7 +968,7 @@ int main()
 				if (Succ[i][j] == 1) {
 					for (int t = 1; t <= NbPeriode; t++) {
 						for (int p = 1; p <= NbFamille; p++) {
-							fichier << "Flot(" << i << "," << j << "," << p << "," << t << ")";
+							fichier << "Flot(" << i << "," << j << "," << p << "," << t << ")" << endl;
 						}
 					}
 				}
@@ -974,7 +977,7 @@ int main()
 		for (int j = 0; j <= NbSommet + 1; j++) {
 			if (StockageMax[j] > 0 && j >= 1 && j <= NbSommet) {
 				for (int p = 1; p <= NbFamille; p++) {
-					for (int t = 1; t <= NbPeriode; t++) {
+					for (int t = 0; t <= NbPeriode; t++) {
 						fichier << "Stock(" << j << "," << p << "," << t << ")" << endl;
 					}
 				}
@@ -992,7 +995,7 @@ int main()
 				if (j != j2) {
 					for (int p = 1; p <= NbFamille; p++) {
 						for (int t = 1; t <= NbPeriode; t++) {
-							fichier << " Y(" << j << "," << j2 << "," << p << "," << t << ") ";
+							fichier << " Y(" << j << "," << j2 << "," << p << "," << t << ") " << endl;
 						}
 					}
 				}
@@ -1002,7 +1005,7 @@ int main()
 		{
 			for (int f = 1; f <= NbFamille; f++)
 			{
-				for (int t = 1; t < NbPeriode; t++)
+				for (int t = 1; t <= NbPeriode; t++)
 				{
 					if (StockageMax[j] > 0)
 					{

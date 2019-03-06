@@ -64,13 +64,13 @@
     <None Include="..\..\CSV\CoutOuvLigne.csv">
       <Filter>Fichiers de ressources</Filter>
     </None>
-    <None Include="..\..\CSV\CoutProd.csv">
-      <Filter>Fichiers de ressources</Filter>
-    </None>
     <None Include="..\..\CSV\CoutStock.csv">
       <Filter>Fichiers de ressources</Filter>
     </None>
     <None Include="..\..\CSV\PrixVentes.csv">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="CoutProd.csv">
       <Filter>Fichiers de ressources</Filter>
     </None>
   </ItemGroup>
